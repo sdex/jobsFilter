@@ -11,14 +11,15 @@ const excludedCountries = [
   'Palestinian Territories',
   'Kuwait',
   'Saudi Arabia',
-  'Israel'
+  'Israel',
+  'China'
 ]
 
 const excludedKeywordsInJobTitle = [
   'flutter',
   'ionic',
   'react native',
-  'reactjs'
+  'reactjs',
   'reactnative',
   'xamarin',
   'capacitor',
@@ -34,7 +35,7 @@ const excludedKeywordsInJobTitle = [
   'russian'
 ]
 
-document.addEventListener('click', function (event) {
+/*document.addEventListener('click', function (event) {
   let jobFeedback = event.target.closest('.job-feedback')
   if (jobFeedback) {
     event.preventDefault()
@@ -58,11 +59,11 @@ document.addEventListener('click', function (event) {
 
     localStorage.setItem('garbage', JSON.stringify(array))
   }
-}, true)
+}, true)*/
 
-setInterval(() => {
+function filter() {
   if (document) {
-    let elements = document.querySelectorAll('section.job-tile')
+    let elements = document.querySelectorAll('section.up-card-list-section')
 
     let cnt = 0
 
@@ -70,7 +71,7 @@ setInterval(() => {
 
       let removal = false
 
-      let nodeClientLocation = element.querySelector('strong.client-location')
+      let nodeClientLocation = element.querySelector('[data-test=client-country] strong')
       if (nodeClientLocation) {
         if (excludedCountries.includes(nodeClientLocation.textContent)) {
           cnt++
@@ -79,18 +80,20 @@ setInterval(() => {
         }
       }
 
-      let nodeJobTitle = element.querySelector('a.job-title-link')
+      let nodeJobTitle = element.querySelector('.job-tile-title > a')
       if (nodeJobTitle) {
+        let titleText = nodeJobTitle.textContent.toLowerCase()
         for (let keyword of excludedKeywordsInJobTitle) {
-          if (nodeJobTitle.textContent.toLowerCase().includes(keyword)) {
+          if (titleText.includes(keyword)) {
             cnt++
             console.log(cnt, nodeJobTitle.textContent)
             removal = true
+            break
           }
         }
       }
 
-      let nodeDescriptionContainer = element.querySelector('div.description.break')
+      /*let nodeDescriptionContainer = element.querySelector('div.description.break')
       if (nodeDescriptionContainer) {
         let nodeDescription = element.querySelector('div.description.break').querySelector('span.ng-binding')
 
@@ -109,10 +112,14 @@ setInterval(() => {
           }
         }
       }
-
+      */
       if (removal) {
         element.parentElement.removeChild(element)
       }
     }
   }
+}
+
+setInterval(() => {
+  filter()
 }, 1000)
