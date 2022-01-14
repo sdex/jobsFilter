@@ -4,10 +4,5 @@ function sendAction(action) {
     });
 }
 
-document.getElementById("font-size-decrease").onclick = () => sendAction("font-size-decrease");
+document.getElementById("reload-page").onclick = () => sendAction("reload-page");
 
-document.getElementById("font-size-increase").onclick = () => sendAction("font-size-increase");
-
-document.getElementById("grayscale-toggle").onclick = () => sendAction("grayscale-toggle");
-
-document.getElementById("invert-toggle").onclick = () => sendAction("invert-toggle");
