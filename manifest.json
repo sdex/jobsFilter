@@ -1,6 +1,6 @@
 {
     "name": "Upwork Helper",
-    "version": "1.0.2",
+    "version": "1.0.5",
     "description": "Upwork Helper",
     "homepage_url": "https://sdex.dev",
     "author": "Yuriy",
@@ -15,9 +15,9 @@
         "default_popup": "src/popup/popup.html",
         "default_icon":
         {
-            "16": "assets/icon.16.jpg",
-            "48": "assets/icon.48.jpg",
-            "128": "assets/icon.128.jpg"
+            "16": "assets/icon.16.png",
+            "48": "assets/icon.48.png",
+            "128": "assets/icon.128.png"
         }
     },
     "content_scripts":
@@ -37,9 +37,9 @@
     ],
     "icons":
     {
-        "16": "assets/icon.16.jpg",
-        "48": "assets/icon.48.jpg",
-        "128": "assets/icon.128.jpg"
+        "16": "assets/icon.16.png",
+        "48": "assets/icon.48.png",
+        "128": "assets/icon.128.png"
     },
     "browser_specific_settings":
     {

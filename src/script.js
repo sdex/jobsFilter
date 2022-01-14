@@ -12,17 +12,19 @@ const excludedCountries = [
   'Kuwait',
   'Saudi Arabia',
   'Israel',
-  'China'
+  'China',
+  'Uzbekistan'
 ]
 
 const excludedKeywordsInJobTitle = [
   'flutter',
   'ionic',
-  'react native',
+  'react',
   'reactjs',
   'reactnative',
   'xamarin',
   'capacitor',
+  'cordova',
   'publish',
   'publishing',
   'publisher',
@@ -32,8 +34,23 @@ const excludedKeywordsInJobTitle = [
   'upload in your',
   'upload android',
   'play console',
-  'russian'
+  'play store',
+  'russian',
+  'mt4',
+  'mq4',
+  'nativescript',
+  'unity'
 ]
+
+chrome.runtime.onMessage.addListener(msg => {
+  if (msg.action === "reload-page") {
+    reloadPage()
+  }
+});
+
+function reloadPage() {
+  location.reload();
+}
 
 /*document.addEventListener('click', function (event) {
   let jobFeedback = event.target.closest('.job-feedback')
@@ -82,11 +99,11 @@ function filter() {
 
       let nodeJobTitle = element.querySelector('.job-tile-title > a')
       if (nodeJobTitle) {
-        let titleText = nodeJobTitle.textContent.toLowerCase()
+        let titleText = nodeJobTitle.textContent.toLowerCase().trim()
         for (let keyword of excludedKeywordsInJobTitle) {
           if (titleText.includes(keyword)) {
             cnt++
-            console.log(cnt, nodeJobTitle.textContent)
+            console.log(cnt, nodeJobTitle.textContent.trim(), nodeJobTitle.href)
             removal = true
             break
           }
@@ -122,4 +139,4 @@ function filter() {
 
 setInterval(() => {
   filter()
-}, 1000)
+}, 500)
