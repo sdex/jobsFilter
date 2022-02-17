@@ -13,7 +13,8 @@ const excludedCountries = [
   'Saudi Arabia',
   'Israel',
   'China',
-  'Uzbekistan'
+  'Uzbekistan',
+  'Thailand'
 ]
 
 const excludedKeywordsInJobTitle = [
@@ -39,7 +40,10 @@ const excludedKeywordsInJobTitle = [
   'mt4',
   'mq4',
   'nativescript',
-  'unity'
+  'unity',
+  'desarrollador',
+  'google play',
+  'for small task'
 ]
 
 chrome.runtime.onMessage.addListener(msg => {
