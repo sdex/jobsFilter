@@ -1,15 +1,23 @@
-const excludedCountries = JSON.parse(localStorage.getItem('countries')) || [];
-const excludedTitleKeywords = JSON.parse(localStorage.getItem('title_keywords')) || [];
+var excludedCountries = []
+var excludedTitleKeywords = []
 
-console.log('Loaded %d countries', excludedCountries.length)
-console.log('Loaded %d title keywords', excludedTitleKeywords.length)
+browser.storage.local.get(null, function (data) {
+  excludedCountries = data['countries'] || []
+  excludedTitleKeywords = data['title_keywords'] || []
+  console.log('Loaded %d countries', excludedCountries.length)
+  console.log('Loaded %d title keywords', excludedTitleKeywords.length)
+
+  setInterval(() => {
+    filter()
+  }, 1000)
+})
 
 chrome.runtime.onMessage.addListener(msg => {
   console.log('Got action: %s', msg.action)
   if (msg.action === "reload-page") {
     location.reload()
   }
-});
+})
 
 /*let nodeDescriptionContainer = element.querySelector('div.description.break')
       if (nodeDescriptionContainer) {
@@ -66,7 +74,3 @@ function filter() {
     }
   }
 }
-
-setInterval(() => {
-  filter()
-}, 1000)
