@@ -49,3 +49,8 @@ function loadConfigFile(file) {
 document.getElementById("reload-page").onclick = () => sendAction("reload-page")
 document.getElementById("export-config").onclick = () => exportConfig()
 document.getElementById("import-config").onclick = () => importConfig()
+document.getElementById("options").onclick = () => {
+    browser.tabs.create({
+        url: "options.html"
+    })
+}

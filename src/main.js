@@ -14,7 +14,7 @@ browser.storage.local.get(null, function (data) {
 
 chrome.runtime.onMessage.addListener(msg => {
   console.log('Got action: %s', msg.action)
-  if (msg.action === "reload-page") {
+  if (msg.action === 'reload-page') {
     location.reload()
   }
 })
