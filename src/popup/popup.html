@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
-<body>
-<div class="rows">
-    <div class="row">
-        <a href="https://www.upwork.com/nx/find-work/" onclick="window.close();" target="_blank">Home</a> | 
-        <a href="https://www.upwork.com/nx/reports/overview/?tab=in-progress" target="_blank">Reports</a> | 
-        <a href="https://www.upwork.com/messages/" target="_blank">Messages</a>
-    </div>
-    <div class="row">
-        <h3>Controls</h3>
-        <div class="col col-12">
-            <div class="action-button" id="reload-page">Reload page</div>
-            <div class="action-button" id="export-config">Export config</div>
-            <div class="action-button" id="import-config">Import config</div>
 
+<body>
+    <div class="rows">
+        <div class="row">
+            <a href="https://www.upwork.com/nx/find-work/" onclick="window.close();" target="_blank">Home</a> |
+            <a href="https://www.upwork.com/nx/reports/overview/?tab=in-progress" target="_blank">Reports</a> |
+            <a href="https://www.upwork.com/messages/" target="_blank">Messages</a>
+        </div>
+        <div class="row">
+            <h3>Controls</h3>
+            <div class="col col-12">
+                <div class="action-button" id="reload-page">Reload page</div>
+                <div class="action-button" id="export-config">Export config</div>
+                <div class="action-button" id="import-config">Import config</div>
+                <div class="action-button" id="options">Options</div>
+
+            </div>
         </div>
     </div>
-</div>
-<script src="config.js"></script>
-<input id="file-input" type="file" name="name" style="display: none;" />
+    <input id="file-input" type="file" name="name" style="display: none;" />
+    <script src="popup.js"></script>
 </body>
+
 </html>

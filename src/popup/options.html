@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options</title>
+    <script src="options.js"></script>
+    <link rel="stylesheet" href="material.min.css">
+    <link rel="stylesheet" type="text/css" href="options.css">
+    <script src="material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+
+    <div class="ew-card mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Blocked countries</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="country_input" pattern="[A-Za-z .]*">
+                    <label class="mdl-textfield__label" for="country_input">Add country, e.g. Narnia</label>
+                    <span class="mdl-textfield__error">Wrong country</span>
+                </div>
+                <button id="btn_add_country"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-button--colored">
+                    <i class="material-icons">check</i>
+                </button>
+            </div>
+            <div id="countries_container"></div>
+        </div>
+        <div class="mdl-card__menu">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                <span class="mdl-switch__label"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="ew-card mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Blocked title keywords</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="keyword_input">
+                    <label class="mdl-textfield__label" for="keyword_input">Add keyword, e.g. Blockchain</label>
+                </div>
+                <button id="btn_add_keyword"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-button--colored">
+                    <i class="material-icons">check</i>
+                </button>
+            </div>
+            <div id="keywords_container"> </div>
+        </div>
+        <div class="mdl-card__menu">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                <span class="mdl-switch__label"></span>
+            </label>
+        </div>
+    </div>
+
+</body>
+
+</html>

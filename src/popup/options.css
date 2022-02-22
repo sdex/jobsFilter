@@ -1,0 +1,12 @@
+.ew-card {
+    max-width: 900px;
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    margin: 1% auto;
+    flex-shrink: 0;
+}
+
+.ew-chip {
+    margin: 5px 5px;
+}
