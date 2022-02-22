@@ -5,12 +5,12 @@ function sendAction(action) {
 }
 
 var saveData = (function () {
-    var a = document.createElement("a")
+    var a = document.createElement('a')
     document.body.appendChild(a)
-    a.style = "display: none"
+    a.style = 'display: none'
     return function (data, fileName) {
         var json = JSON.stringify(data),
-            blob = new Blob([json], { type: "octet/stream" }),
+            blob = new Blob([json], { type: 'octet/stream' }),
             url = window.URL.createObjectURL(blob)
         a.href = url
         a.download = fileName
@@ -40,17 +40,24 @@ function loadConfigFile(file) {
     fileReader.onload = function receivedText(e) {
         let data = e.target.result
         browser.storage.local.set(JSON.parse(data), function () {
-            sendAction("reload-page")
+            sendAction('reload-page')
         })
     }
     fileReader.readAsText(file)
 }
 
-document.getElementById("reload-page").onclick = () => sendAction("reload-page")
-document.getElementById("export-config").onclick = () => exportConfig()
-document.getElementById("import-config").onclick = () => importConfig()
-document.getElementById("options").onclick = () => {
+function createTab(url) {
     browser.tabs.create({
-        url: "options.html"
+        url: url
     })
+    window.close()
 }
+
+document.getElementById('open-home').onclick = () => createTab('https://www.upwork.com/nx/find-work/')
+document.getElementById('open-reports').onclick = () => createTab('https://www.upwork.com/nx/reports/overview/?tab=in-progress')
+document.getElementById('open-messages').onclick = () => createTab('https://www.upwork.com/messages/')
+
+document.getElementById('reload-page').onclick = () => sendAction('reload-page')
+document.getElementById('export-config').onclick = () => exportConfig()
+document.getElementById('import-config').onclick = () => importConfig()
+document.getElementById('options').onclick = () => createTab('options.html')
