@@ -1,10 +1,15 @@
-.ew-card {
-    max-width: 900px;
-    padding: 10px;
-    display: flex;
+.ew-card-parent {
     width: 100%;
-    margin: 1% auto;
-    flex-shrink: 0;
+    padding: 15px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.ew-card {
+    width: 100%;
+    display: flex;
+    max-width: 900px;
+    padding: 0px;
 }
 
 .ew-chip {

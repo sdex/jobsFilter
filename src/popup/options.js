@@ -1,8 +1,10 @@
+'use strict';
+
 window.addEventListener('load', function (event) {
     load()
 
     document.getElementById('country_input').addEventListener('keyup', function (event) {
-        if (event.key === "Enter") {
+        if (event.key === 'Enter') {
             event.preventDefault()
             addCountry()
         }
@@ -11,7 +13,7 @@ window.addEventListener('load', function (event) {
         addCountry()
     })
     document.getElementById('keyword_input').addEventListener('keyup', function (event) {
-        if (event.key === "Enter") {
+        if (event.key === 'Enter') {
             event.preventDefault()
             addKeyword()
         }
@@ -46,6 +48,12 @@ function load() {
     })
 }
 
+function showSnackbar(text) {
+    var snackbarContainer = document.getElementById('snackbar_container')
+    var data = { message: text }
+    snackbarContainer.MaterialSnackbar.showSnackbar(data)
+}
+
 function addCountry() {
     var inputFilter = document.getElementById('country_input');
     var filterValue = inputFilter.value;
@@ -61,7 +69,7 @@ function addCountry() {
         browser.storage.local.set({
             countries: excludedCountries
         }, function () {
-            console.log('Add new country: %s', filterValue)
+            showSnackbar('Added "' + filterValue + '"')
         })
     })
 }
@@ -77,7 +85,7 @@ function removeCountry(id) {
         browser.storage.local.set({
             countries: excludedCountries
         }, function () {
-            console.log('Remove country: %s', id)
+            showSnackbar('Removed "' + id + '"')
         })
     })
 }
@@ -121,7 +129,7 @@ function addKeyword() {
         browser.storage.local.set({
             title_keywords: excludedTitleKeywords
         }, function () {
-            console.log('Add new keyword: %s', filterValue)
+            showSnackbar('Added "' + filterValue + '"')
         })
     })
 }
@@ -137,7 +145,7 @@ function removeKeyword(id) {
         browser.storage.local.set({
             title_keywords: excludedTitleKeywords
         }, function () {
-            console.log('Remove keyword: %s', id)
+            showSnackbar('Removed "' + id + '"')
         })
     })
 }
