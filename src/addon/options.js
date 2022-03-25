@@ -1,32 +1,24 @@
 'use strict';
 
-window.addEventListener('load', function (event) {
-    load()
-
-    document.getElementById('country_input').addEventListener('keyup', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault()
-            addCountry()
-        }
-    })
-    document.getElementById('btn_add_country').addEventListener('click', function () {
-        addCountry()
-    })
-    document.getElementById('keyword_input').addEventListener('keyup', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault()
-            addKeyword()
-        }
-    })
-    document.getElementById('btn_add_keyword').addEventListener('click', function () {
-        addKeyword()
-    })
-})
+window.addEventListener('load', function (event) { load() })
 
 function load() {
     browser.storage.local.get(null, function (data) {
+        // console.log(data)
         var excludedCountries = data['countries'] || []
         var excludedTitleKeywords = data['title_keywords'] || []
+        var filterCountries = data['filter_countries']
+        var filterKeywords = data['filter_keywords']
+
+        // if (!filterCountries) {
+        //     document.getElementById('countries_filter_switch')
+        //         .setAttribute("checked", "false")
+        // }
+        // if (!filterKeywords) {
+        //     document.getElementById('keywords_filter_switch')
+        //         .setAttribute("checked", "false")
+        // }
+
         excludedCountries.sort(function (a, b) {
             return a.toLowerCase().localeCompare(b.toLowerCase());
         });
@@ -45,6 +37,52 @@ function load() {
         for (let keyword of excludedTitleKeywords) {
             addKeywordItem(keywordsContainer, keyword)
         }
+
+        addEventListeners()
+    })
+}
+
+function addEventListeners() {
+    document.getElementById('countries_filter_switch').addEventListener('change', (event) => {
+        var isEnabled = event.currentTarget.checked
+        browser.storage.local.set({
+            filter_countries: isEnabled
+        }, function () {
+            showSnackbar('Countries filter has been ' + (isEnabled ? 'enabled' : 'disabled'))
+        })
+    })
+    document.getElementById('country_input').addEventListener('keyup', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault()
+            addCountry()
+        }
+    })
+    document.getElementById('btn_add_country').addEventListener('click', function () {
+        addCountry()
+    })
+
+    document.getElementById('keywords_filter_switch').addEventListener('change', (event) => {
+        var isEnabled = event.currentTarget.checked
+        browser.storage.local.set({
+            filter_keywords: isEnabled
+        }, function () {
+            showSnackbar('Keywords filter has been ' + (isEnabled ? 'enabled' : 'disabled'))
+        })
+    })
+    document.getElementById('keyword_input').addEventListener('keyup', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault()
+            addKeyword()
+        }
+    })
+    document.getElementById('btn_add_keyword').addEventListener('click', function () {
+        addKeyword()
+    })
+    document.getElementById('btn_export_config').addEventListener('click', function () {
+        exportConfig()
+    })
+    document.getElementById('btn_import_config').addEventListener('click', function () {
+        importConfig()
     })
 }
 
@@ -172,4 +210,46 @@ function addKeywordItem(container, value) {
     item.appendChild(deleteButton)
     componentHandler.upgradeElement(item)
     container.appendChild(item)
+}
+
+var saveData = (function () {
+    var a = document.createElement('a')
+    document.body.appendChild(a)
+    a.style = 'display: none'
+    return function (data, fileName) {
+        var json = JSON.stringify(data),
+            blob = new Blob([json], { type: 'octet/stream' }),
+            url = window.URL.createObjectURL(blob)
+        a.href = url
+        a.download = fileName
+        a.click()
+        window.URL.revokeObjectURL(url)
+    }
+}())
+
+function exportConfig() {
+    browser.storage.local.get(null, function (data) {
+        var fileName = 'up-ext-config.json'
+        saveData(data, fileName)
+    })
+}
+
+function importConfig() {
+    var inputFile = document.getElementById('file-input')
+    inputFile.onchange = e => {
+        var file = e.target.files[0]
+        loadConfigFile(file)
+    }
+    inputFile.click()
+}
+
+function loadConfigFile(file) {
+    var fileReader = new FileReader()
+    fileReader.onload = function receivedText(e) {
+        let data = e.target.result
+        browser.storage.local.set(JSON.parse(data), function () {
+            location.reload()
+        })
+    }
+    fileReader.readAsText(file)
 }
