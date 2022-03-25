@@ -28,14 +28,14 @@
                     </div>
                     <button id="btn_add_country"
                         class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-button--colored">
-                        <i class="material-icons">check</i>
+                        <i class="material-icons">add</i>
                     </button>
                 </div>
                 <div id="countries_container"></div>
             </div>
             <div class="mdl-card__menu">
-                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-                    <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="countries_filter_switch">
+                    <input type="checkbox" id="countries_filter_switch" class="mdl-switch__input" checked>
                     <span class="mdl-switch__label"></span>
                 </label>
             </div>
@@ -55,24 +55,49 @@
                     </div>
                     <button id="btn_add_keyword"
                         class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-button--colored">
-                        <i class="material-icons">check</i>
+                        <i class="material-icons">add</i>
                     </button>
                 </div>
                 <div id="keywords_container"> </div>
             </div>
             <div class="mdl-card__menu">
-                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-                    <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="keywords_filter_switch">
+                    <input type="checkbox" id="keywords_filter_switch" class="mdl-switch__input" checked>
                     <span class="mdl-switch__label"></span>
                 </label>
             </div>
         </div>
     </div>
 
+    <div class="ew-card-parent">
+        <div class="ew-card mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Other</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <div>
+                    <button id="btn_export_config"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                        Export configuration
+                    </button>
+                </div>
+                <br />
+                <div>
+                    <button id="btn_import_config"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                        Import configuration
+                    </button>
+                    <input id="file-input" type="file" name="name" style="display: none;" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div id="snackbar_container" class="mdl-js-snackbar mdl-snackbar">
         <div class="mdl-snackbar__text"></div>
         <button class="mdl-snackbar__action" type="button"></button>
-      </div>
+    </div>
 
 </body>
 
