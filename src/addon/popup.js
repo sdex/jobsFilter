@@ -15,5 +15,4 @@ document.getElementById('open-home').onclick = () => createTab('https://www.upwo
 document.getElementById('open-reports').onclick = () => createTab('https://www.upwork.com/nx/reports/overview/?tab=in-progress')
 document.getElementById('open-messages').onclick = () => createTab('https://www.upwork.com/messages/')
 
-document.getElementById('reload-page').onclick = () => sendAction('reload-page')
 document.getElementById('options').onclick = () => createTab('options.html')
