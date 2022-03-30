@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 window.addEventListener('load', function (event) { load() })
 
@@ -20,13 +20,15 @@ function load() {
         // }
 
         excludedCountries.sort(function (a, b) {
-            return a.toLowerCase().localeCompare(b.toLowerCase());
-        });
+            return a.toLowerCase().localeCompare(b.toLowerCase())
+        })
         excludedTitleKeywords.sort(function (a, b) {
-            return a.toLowerCase().localeCompare(b.toLowerCase());
-        });
+            return a.toLowerCase().localeCompare(b.toLowerCase())
+        })
         console.log('Loaded %d countries', excludedCountries.length)
+        console.log('Countries filter enabled:', filterCountries)
         console.log('Loaded %d title keywords', excludedTitleKeywords.length)
+        console.log('Keywords filter enabled:', filterKeywords)
 
         var countriesContainer = document.getElementById('countries_container')
         for (let country of excludedCountries) {
@@ -93,12 +95,12 @@ function showSnackbar(text) {
 }
 
 function addCountry() {
-    var inputFilter = document.getElementById('country_input');
-    var filterValue = inputFilter.value;
+    var inputFilter = document.getElementById('country_input')
+    var filterValue = inputFilter.value
     if (!filterValue) {
-        return;
+        return
     }
-    inputFilter.value = null;
+    inputFilter.value = null
     var container = document.getElementById('countries_container')
     addCountryItem(container, filterValue)
     browser.storage.local.get(null, function (data) {
@@ -116,9 +118,9 @@ function removeCountry(id) {
     document.getElementById(id).remove()
     browser.storage.local.get(null, function (data) {
         var excludedCountries = data['countries'] || []
-        const index = excludedCountries.indexOf(id);
+        const index = excludedCountries.indexOf(id)
         if (index > -1) {
-            excludedCountries.splice(index, 1);
+            excludedCountries.splice(index, 1)
         }
         browser.storage.local.set({
             countries: excludedCountries
@@ -139,7 +141,7 @@ function addCountryItem(container, value) {
 
     var deleteButton = document.createElement('button')
     deleteButton.className = 'mdl-chip__action'
-    deleteButton.addEventListener("click", function () { removeCountry(value) }, false);
+    deleteButton.addEventListener("click", function () { removeCountry(value) }, false)
 
     var deleteButtonIcon = document.createElement('i')
     deleteButtonIcon.className = 'material-icons'
@@ -153,12 +155,12 @@ function addCountryItem(container, value) {
 }
 
 function addKeyword() {
-    var inputFilter = document.getElementById('keyword_input');
-    var filterValue = inputFilter.value;
+    var inputFilter = document.getElementById('keyword_input')
+    var filterValue = inputFilter.value
     if (!filterValue) {
-        return;
+        return
     }
-    inputFilter.value = null;
+    inputFilter.value = null
     var container = document.getElementById('keywords_container')
     addKeywordItem(container, filterValue)
     browser.storage.local.get(null, function (data) {
@@ -176,9 +178,9 @@ function removeKeyword(id) {
     document.getElementById(id).remove()
     browser.storage.local.get(null, function (data) {
         var excludedTitleKeywords = data['title_keywords'] || []
-        const index = excludedTitleKeywords.indexOf(id);
+        const index = excludedTitleKeywords.indexOf(id)
         if (index > -1) {
-            excludedTitleKeywords.splice(index, 1);
+            excludedTitleKeywords.splice(index, 1)
         }
         browser.storage.local.set({
             title_keywords: excludedTitleKeywords
@@ -199,7 +201,7 @@ function addKeywordItem(container, value) {
 
     var deleteButton = document.createElement('button')
     deleteButton.className = 'mdl-chip__action'
-    deleteButton.addEventListener("click", function () { removeKeyword(value) }, false);
+    deleteButton.addEventListener("click", function () { removeKeyword(value) }, false)
 
     var deleteButtonIcon = document.createElement('i')
     deleteButtonIcon.className = 'material-icons'
