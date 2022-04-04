@@ -214,20 +214,18 @@ function addKeywordItem(container, value) {
     container.appendChild(item)
 }
 
-var saveData = (function () {
+function saveData(data, fileName) {
     var a = document.createElement('a')
     document.body.appendChild(a)
     a.style = 'display: none'
-    return function (data, fileName) {
-        var json = JSON.stringify(data),
-            blob = new Blob([json], { type: 'octet/stream' }),
-            url = window.URL.createObjectURL(blob)
-        a.href = url
-        a.download = fileName
-        a.click()
-        window.URL.revokeObjectURL(url)
-    }
-}())
+    var json = JSON.stringify(data),
+        blob = new Blob([json], { type: 'octet/stream' }),
+        url = window.URL.createObjectURL(blob)
+    a.href = url
+    a.download = fileName
+    a.click()
+    window.URL.revokeObjectURL(url)
+}
 
 function exportConfig() {
     browser.storage.local.get(null, function (data) {
