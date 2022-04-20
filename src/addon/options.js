@@ -3,6 +3,10 @@
 window.addEventListener('load', function (event) { load() })
 
 function load() {
+    if (typeof browser == "undefined") {
+        addEventListeners()
+        return
+    }
     browser.storage.local.get(null, function (data) {
         // console.log(data)
         var excludedCountries = data['countries'] || []
