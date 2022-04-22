@@ -4,12 +4,19 @@ var excludedTitleKeywords = []
 browser.storage.local.get(null, function (data) {
   excludedCountries = data['countries'] || []
   excludedTitleKeywords = data['title_keywords'] || []
-  console.log('Loaded %d countries', excludedCountries.length)
-  console.log('Loaded %d title keywords', excludedTitleKeywords.length)
 
-  setInterval(() => {
-    filter()
-  }, 1000)
+  var target = document.querySelector('[data-test=job-tile-list]')
+  var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.addedNodes.length > 0) {
+        filter()
+      }
+    })
+  })
+  var config = { childList: true }
+  observer.observe(target, config)
+
+  filter()
 })
 
 chrome.runtime.onMessage.addListener(msg => {
@@ -22,17 +29,14 @@ chrome.runtime.onMessage.addListener(msg => {
 /*let nodeDescriptionContainer = element.querySelector('div.description.break')
       if (nodeDescriptionContainer) {
         let nodeDescription = element.querySelector('div.description.break').querySelector('span.ng-binding')
-
         let garbageJobs = localStorage.getItem('garbage')
         if (garbageJobs) {
           let array = JSON.parse(garbageJobs)
-
           let isGarbage = array.some(g =>
             g.jobTitle === nodeJobTitle.textContent
             && g.location === (nodeClientLocation ? nodeClientLocation.textContent : 'n/a')
             && g.description === nodeDescription.textContent
           )
-
           if (isGarbage) {
             removal = true
           }
