@@ -1,52 +1,41 @@
 {
     "name": "Upwork Helper",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "Upwork Helper",
     "homepage_url": "https://sdex.dev",
     "author": "Yuriy",
     "manifest_version": 2,
-    "permissions":
-    [
-        "activeTab",
-        "storage",
-        "downloads"
+    "permissions": [
+        "storage"
     ],
-    "browser_action":
-    {
+    "browser_action": {
         "default_title": "Upwork Helper",
-        "default_popup": "src/addon/popup.html",
-        "default_icon":
-        {
+        "default_popup": "src/popup/popup.html",
+        "default_icon": {
             "16": "assets/icon.16.png",
             "48": "assets/icon.48.png",
             "128": "assets/icon.128.png"
         }
     },
-    "content_scripts":
-    [
+    "content_scripts": [
         {
             "run_at": "document_end",
-            "matches":
-            [
+            "matches": [
                 "https://www.upwork.com/*/jobs/search/*",
                 "https://www.upwork.com/*/find-work/*"
             ],
-            "js":
-            [
-                "src/main.js"
+            "js": [
+                "src/content/main.js"
             ]
         }
     ],
-    "icons":
-    {
+    "icons": {
         "16": "assets/icon.16.png",
         "48": "assets/icon.48.png",
         "128": "assets/icon.128.png"
     },
-    "browser_specific_settings":
-    {
-        "gecko":
-        {
+    "browser_specific_settings": {
+        "gecko": {
             "id": "jobsfilter@sdex.dev"
         }
     }
