@@ -1,8 +1,12 @@
+var browser = (window.browser) ? window.browser : window.chrome
+
+/* 
 function sendAction(action) {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        chrome.tabs.sendMessage(tabs[0].id, { action: action })
+    browser.tabs.query({ active: true, currentWindow: true }, tabs => {
+        browser.tabs.sendMessage(tabs[0].id, { action: action })
     })
 }
+ */
 
 function createTab(url) {
     browser.tabs.create({
@@ -15,4 +19,7 @@ document.getElementById('open-home').onclick = () => createTab('https://www.upwo
 document.getElementById('open-reports').onclick = () => createTab('https://www.upwork.com/nx/reports/overview/?tab=in-progress')
 document.getElementById('open-messages').onclick = () => createTab('https://www.upwork.com/messages/')
 
-document.getElementById('options').onclick = () => createTab('../options/options.html')
+document.getElementById('options').onclick = () => {
+    browser.runtime.openOptionsPage()
+    window.close()
+}
