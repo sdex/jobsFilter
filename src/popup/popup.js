@@ -1,13 +1,5 @@
 var browser = (window.browser) ? window.browser : window.chrome
 
-/* 
-function sendAction(action) {
-    browser.tabs.query({ active: true, currentWindow: true }, tabs => {
-        browser.tabs.sendMessage(tabs[0].id, { action: action })
-    })
-}
- */
-
 function createTab(url) {
     browser.tabs.create({
         url: url

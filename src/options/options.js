@@ -3,11 +3,7 @@
 window.addEventListener('load', function (event) { load() })
 
 function load() {
-    if (typeof browser == "undefined") {
-        addEventListeners()
-        return
-    }
-    browser.storage.local.get(null, function (data) {
+    getPrefs().then(data => {
         // console.log(data)
         var excludedCountries = data['countries'] || []
         var excludedTitleKeywords = data['title_keywords'] || []
@@ -48,10 +44,26 @@ function load() {
     })
 }
 
+function getPrefs() {
+    if (window.browser) {
+        return browser.storage.sync.get(null)
+    } else {
+        return new Promise(resolve => chrome.storage.sync.get(null, resolve))
+    }
+}
+
+function setPrefs(data, callback) {
+    if (window.browser) {
+        return browser.storage.sync.set(data, callback)
+    } else {
+        return chrome.storage.sync.set(data, callback)
+    }
+}
+
 function addEventListeners() {
     document.getElementById('countries_filter_switch').addEventListener('change', (event) => {
         var isEnabled = event.currentTarget.checked
-        browser.storage.local.set({
+        setPrefs({
             filter_countries: isEnabled
         }, function () {
             showSnackbar('Countries filter has been ' + (isEnabled ? 'enabled' : 'disabled'))
@@ -69,7 +81,7 @@ function addEventListeners() {
 
     document.getElementById('keywords_filter_switch').addEventListener('change', (event) => {
         var isEnabled = event.currentTarget.checked
-        browser.storage.local.set({
+        setPrefs({
             filter_keywords: isEnabled
         }, function () {
             showSnackbar('Keywords filter has been ' + (isEnabled ? 'enabled' : 'disabled'))
@@ -107,10 +119,10 @@ function addCountry() {
     inputFilter.value = null
     var container = document.getElementById('countries_container')
     addCountryItem(container, filterValue)
-    browser.storage.local.get(null, function (data) {
+    getPrefs().then(data => {
         var excludedCountries = data['countries'] || []
         excludedCountries.push(filterValue)
-        browser.storage.local.set({
+        setPrefs({
             countries: excludedCountries
         }, function () {
             showSnackbar('Added "' + filterValue + '"')
@@ -120,13 +132,13 @@ function addCountry() {
 
 function removeCountry(id) {
     document.getElementById(id).remove()
-    browser.storage.local.get(null, function (data) {
+    getPrefs().then(data => {
         var excludedCountries = data['countries'] || []
         const index = excludedCountries.indexOf(id)
         if (index > -1) {
             excludedCountries.splice(index, 1)
         }
-        browser.storage.local.set({
+        setPrefs({
             countries: excludedCountries
         }, function () {
             showSnackbar('Removed "' + id + '"')
@@ -167,10 +179,10 @@ function addKeyword() {
     inputFilter.value = null
     var container = document.getElementById('keywords_container')
     addKeywordItem(container, filterValue)
-    browser.storage.local.get(null, function (data) {
+    getPrefs().then(data => {
         var excludedTitleKeywords = data['title_keywords'] || []
         excludedTitleKeywords.push(filterValue)
-        browser.storage.local.set({
+        setPrefs({
             title_keywords: excludedTitleKeywords
         }, function () {
             showSnackbar('Added "' + filterValue + '"')
@@ -180,13 +192,13 @@ function addKeyword() {
 
 function removeKeyword(id) {
     document.getElementById(id).remove()
-    browser.storage.local.get(null, function (data) {
+    getPrefs().then(data => {
         var excludedTitleKeywords = data['title_keywords'] || []
         const index = excludedTitleKeywords.indexOf(id)
         if (index > -1) {
             excludedTitleKeywords.splice(index, 1)
         }
-        browser.storage.local.set({
+        setPrefs({
             title_keywords: excludedTitleKeywords
         }, function () {
             showSnackbar('Removed "' + id + '"')
@@ -232,7 +244,7 @@ function saveData(data, fileName) {
 }
 
 function exportConfig() {
-    browser.storage.local.get(null, function (data) {
+    getPrefs().then(data => {
         var fileName = 'up-ext-config.json'
         saveData(data, fileName)
     })
@@ -251,7 +263,7 @@ function loadConfigFile(file) {
     var fileReader = new FileReader()
     fileReader.onload = function receivedText(e) {
         let data = e.target.result
-        browser.storage.local.set(JSON.parse(data), function () {
+        setPrefs(JSON.parse(data), function () {
             location.reload()
         })
     }

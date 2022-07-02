@@ -1,7 +1,7 @@
 var excludedCountries = []
 var excludedTitleKeywords = []
 
-browser.storage.local.get(null, function (data) {
+getPrefs().then(data => {
   excludedCountries = data['countries'] || []
   excludedTitleKeywords = data['title_keywords'] || []
 
@@ -19,30 +19,13 @@ browser.storage.local.get(null, function (data) {
   filter()
 })
 
-chrome.runtime.onMessage.addListener(msg => {
-  console.log('Got action: %s', msg.action)
-  if (msg.action === 'reload-page') {
-    location.reload()
+function getPrefs() {
+  if (window.browser) {
+      return browser.storage.sync.get(null)
+  } else {
+      return new Promise(resolve => chrome.storage.sync.get(null, resolve))
   }
-})
-
-/*let nodeDescriptionContainer = element.querySelector('div.description.break')
-      if (nodeDescriptionContainer) {
-        let nodeDescription = element.querySelector('div.description.break').querySelector('span.ng-binding')
-        let garbageJobs = localStorage.getItem('garbage')
-        if (garbageJobs) {
-          let array = JSON.parse(garbageJobs)
-          let isGarbage = array.some(g =>
-            g.jobTitle === nodeJobTitle.textContent
-            && g.location === (nodeClientLocation ? nodeClientLocation.textContent : 'n/a')
-            && g.description === nodeDescription.textContent
-          )
-          if (isGarbage) {
-            removal = true
-          }
-        }
-      }
-      */
+}
 
 function filter() {
   if (document) {
