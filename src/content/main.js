@@ -1,22 +1,21 @@
-var excludedCountries = []
-var excludedTitleKeywords = []
+'use strict'
 
 getPrefs().then(data => {
-  excludedCountries = data['countries'] || []
-  excludedTitleKeywords = data['title_keywords'] || []
+  const excludedCountries = data['countries'] || []
+  const excludedTitleKeywords = data['title_keywords'] || []
 
-  var target = document.querySelector('[data-test=job-tile-list]')
-  var observer = new MutationObserver(function (mutations) {
+  const target = document.querySelector('[data-test=job-tile-list]')
+  const observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
-        filter()
+        filter(excludedCountries, excludedTitleKeywords)
       }
     })
   })
-  var config = { childList: true }
+  const config = { childList: true }
   observer.observe(target, config)
 
-  filter()
+  filter(excludedCountries, excludedTitleKeywords)
 })
 
 function getPrefs() {
@@ -27,7 +26,7 @@ function getPrefs() {
   }
 }
 
-function filter() {
+function filter(excludedCountries, excludedTitleKeywords) {
   if (document) {
     let elements = document.querySelectorAll('section.up-card-list-section')
     let counter = 0

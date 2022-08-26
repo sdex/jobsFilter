@@ -5,10 +5,10 @@ window.addEventListener('load', function (event) { load() })
 function load() {
     getPrefs().then(data => {
         // console.log(data)
-        var excludedCountries = data['countries'] || []
-        var excludedTitleKeywords = data['title_keywords'] || []
-        var filterCountries = data['filter_countries']
-        var filterKeywords = data['filter_keywords']
+        const excludedCountries = data['countries'] || []
+        const excludedTitleKeywords = data['title_keywords'] || []
+        const filterCountries = data['filter_countries']
+        const filterKeywords = data['filter_keywords']
 
         // if (!filterCountries) {
         //     document.getElementById('countries_filter_switch')
@@ -30,12 +30,12 @@ function load() {
         console.log('Loaded %d title keywords', excludedTitleKeywords.length)
         console.log('Keywords filter enabled:', filterKeywords)
 
-        var countriesContainer = document.getElementById('countries_container')
+        const countriesContainer = document.getElementById('countries_container')
         for (let country of excludedCountries) {
             addCountryItem(countriesContainer, country)
         }
 
-        var keywordsContainer = document.getElementById('keywords_container')
+        const keywordsContainer = document.getElementById('keywords_container')
         for (let keyword of excludedTitleKeywords) {
             addKeywordItem(keywordsContainer, keyword)
         }
@@ -62,7 +62,7 @@ function setPrefs(data, callback) {
 
 function addEventListeners() {
     document.getElementById('countries_filter_switch').addEventListener('change', (event) => {
-        var isEnabled = event.currentTarget.checked
+        const isEnabled = event.currentTarget.checked
         setPrefs({
             filter_countries: isEnabled
         }, function () {
@@ -80,7 +80,7 @@ function addEventListeners() {
     })
 
     document.getElementById('keywords_filter_switch').addEventListener('change', (event) => {
-        var isEnabled = event.currentTarget.checked
+        const isEnabled = event.currentTarget.checked
         setPrefs({
             filter_keywords: isEnabled
         }, function () {
@@ -105,22 +105,22 @@ function addEventListeners() {
 }
 
 function showSnackbar(text) {
-    var snackbarContainer = document.getElementById('snackbar_container')
-    var data = { message: text }
+    const snackbarContainer = document.getElementById('snackbar_container')
+    const data = { message: text }
     snackbarContainer.MaterialSnackbar.showSnackbar(data)
 }
 
 function addCountry() {
-    var inputFilter = document.getElementById('country_input')
-    var filterValue = inputFilter.value
+    const inputFilter = document.getElementById('country_input')
+    const filterValue = inputFilter.value
     if (!filterValue) {
         return
     }
     inputFilter.value = null
-    var container = document.getElementById('countries_container')
+    const container = document.getElementById('countries_container')
     addCountryItem(container, filterValue)
     getPrefs().then(data => {
-        var excludedCountries = data['countries'] || []
+        const excludedCountries = data['countries'] || []
         excludedCountries.push(filterValue)
         setPrefs({
             countries: excludedCountries
@@ -133,7 +133,7 @@ function addCountry() {
 function removeCountry(id) {
     document.getElementById(id).remove()
     getPrefs().then(data => {
-        var excludedCountries = data['countries'] || []
+        const excludedCountries = data['countries'] || []
         const index = excludedCountries.indexOf(id)
         if (index > -1) {
             excludedCountries.splice(index, 1)
@@ -147,19 +147,19 @@ function removeCountry(id) {
 }
 
 function addCountryItem(container, value) {
-    var item = document.createElement('div')
+    const item = document.createElement('div')
     item.id = value
     item.className = 'ew-chip mdl-chip mdl-chip--deletable'
 
-    var title = document.createElement('span')
+    const title = document.createElement('span')
     title.className = 'mdl-chip__text'
     title.textContent = value
 
-    var deleteButton = document.createElement('button')
+    const deleteButton = document.createElement('button')
     deleteButton.className = 'mdl-chip__action'
     deleteButton.addEventListener("click", function () { removeCountry(value) }, false)
 
-    var deleteButtonIcon = document.createElement('i')
+    const deleteButtonIcon = document.createElement('i')
     deleteButtonIcon.className = 'material-icons'
     deleteButtonIcon.textContent = 'cancel'
     deleteButton.appendChild(deleteButtonIcon)
@@ -171,16 +171,16 @@ function addCountryItem(container, value) {
 }
 
 function addKeyword() {
-    var inputFilter = document.getElementById('keyword_input')
-    var filterValue = inputFilter.value
+    const inputFilter = document.getElementById('keyword_input')
+    const filterValue = inputFilter.value
     if (!filterValue) {
         return
     }
     inputFilter.value = null
-    var container = document.getElementById('keywords_container')
+    const container = document.getElementById('keywords_container')
     addKeywordItem(container, filterValue)
     getPrefs().then(data => {
-        var excludedTitleKeywords = data['title_keywords'] || []
+        const excludedTitleKeywords = data['title_keywords'] || []
         excludedTitleKeywords.push(filterValue)
         setPrefs({
             title_keywords: excludedTitleKeywords
@@ -193,7 +193,7 @@ function addKeyword() {
 function removeKeyword(id) {
     document.getElementById(id).remove()
     getPrefs().then(data => {
-        var excludedTitleKeywords = data['title_keywords'] || []
+        const excludedTitleKeywords = data['title_keywords'] || []
         const index = excludedTitleKeywords.indexOf(id)
         if (index > -1) {
             excludedTitleKeywords.splice(index, 1)
@@ -207,19 +207,19 @@ function removeKeyword(id) {
 }
 
 function addKeywordItem(container, value) {
-    var item = document.createElement('div')
+    const item = document.createElement('div')
     item.id = value
     item.className = 'ew-chip mdl-chip mdl-chip--deletable'
 
-    var title = document.createElement('span')
+    const title = document.createElement('span')
     title.className = 'mdl-chip__text'
     title.textContent = value
 
-    var deleteButton = document.createElement('button')
+    const deleteButton = document.createElement('button')
     deleteButton.className = 'mdl-chip__action'
     deleteButton.addEventListener("click", function () { removeKeyword(value) }, false)
 
-    var deleteButtonIcon = document.createElement('i')
+    const deleteButtonIcon = document.createElement('i')
     deleteButtonIcon.className = 'material-icons'
     deleteButtonIcon.textContent = 'cancel'
     deleteButton.appendChild(deleteButtonIcon)
@@ -231,10 +231,10 @@ function addKeywordItem(container, value) {
 }
 
 function saveData(data, fileName) {
-    var a = document.createElement('a')
+    const a = document.createElement('a')
     document.body.appendChild(a)
     a.style = 'display: none'
-    var json = JSON.stringify(data),
+    const json = JSON.stringify(data),
         blob = new Blob([json], { type: 'octet/stream' }),
         url = window.URL.createObjectURL(blob)
     a.href = url
@@ -245,24 +245,24 @@ function saveData(data, fileName) {
 
 function exportConfig() {
     getPrefs().then(data => {
-        var fileName = 'up-ext-config.json'
+        const fileName = 'up-ext-config.json'
         saveData(data, fileName)
     })
 }
 
 function importConfig() {
-    var inputFile = document.getElementById('file-input')
+    const inputFile = document.getElementById('file-input')
     inputFile.onchange = e => {
-        var file = e.target.files[0]
+        const file = e.target.files[0]
         loadConfigFile(file)
     }
     inputFile.click()
 }
 
 function loadConfigFile(file) {
-    var fileReader = new FileReader()
+    const fileReader = new FileReader()
     fileReader.onload = function receivedText(e) {
-        let data = e.target.result
+        const data = e.target.result
         setPrefs(JSON.parse(data), function () {
             location.reload()
         })
