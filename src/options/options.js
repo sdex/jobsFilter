@@ -4,20 +4,26 @@ window.addEventListener('load', function (event) { load() })
 
 function load() {
     getPrefs().then(data => {
-        // console.log(data)
+        console.debug(data)
         const excludedCountries = data['countries'] || []
         const excludedTitleKeywords = data['title_keywords'] || []
-        const filterCountries = data['filter_countries']
-        const filterKeywords = data['filter_keywords']
+        const filterCountriesPref = data['filter_countries']
+        const filterKeywordsPref = data['filter_keywords']
+        const filterCountries = (filterCountriesPref === undefined) ? true : filterCountriesPref
+        const filterKeywords = (filterKeywordsPref === undefined) ? true : filterKeywordsPref
 
-        // if (!filterCountries) {
-        //     document.getElementById('countries_filter_switch')
-        //         .setAttribute("checked", "false")
-        // }
-        // if (!filterKeywords) {
-        //     document.getElementById('keywords_filter_switch')
-        //         .setAttribute("checked", "false")
-        // }
+        let filterCountriesSwitch = document.getElementById('countries_filter_label').MaterialSwitch
+        if (filterCountries) {
+            filterCountriesSwitch.on()
+        } else {
+            filterCountriesSwitch.off()
+        }
+        let filterKeywordsSwitch = document.getElementById('keywords_filter_label').MaterialSwitch
+        if (filterKeywords) {
+            filterKeywordsSwitch.on()
+        } else {
+            filterKeywordsSwitch.off()
+        }
 
         excludedCountries.sort(function (a, b) {
             return a.toLowerCase().localeCompare(b.toLowerCase())
