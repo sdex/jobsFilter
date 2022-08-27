@@ -1,8 +1,18 @@
 'use strict'
 
 getPrefs().then(data => {
-  const excludedCountries = data['countries'] || []
-  const excludedTitleKeywords = data['title_keywords'] || []
+  let excludedCountries = data['countries'] || []
+  let excludedTitleKeywords = data['title_keywords'] || []
+  const filterCountries = data['filter_countries']
+  const filterKeywords = data['filter_keywords']
+  if (!filterCountries) {
+    excludedCountries = []
+    console.log('Countries filter is disabled')
+  }
+  if (!filterKeywords) {
+    excludedTitleKeywords = []
+    console.log('Keywords filter is disabled')
+  }
 
   const target = document.querySelector('[data-test=job-tile-list]')
   const observer = new MutationObserver(function (mutations) {
@@ -55,7 +65,7 @@ function filter(excludedCountries, excludedTitleKeywords) {
         }
       }
       if (hideJob) {
-        element.parentElement.removeChild(element)
+        element.style.display = 'none'
       }
     }
   }
