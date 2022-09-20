@@ -1,5 +1,5 @@
-## extWork - Browser extension to help freelancers improve their productivity 
+## jobsFilter - a little helper to diminish junk jobs from the feed 
 
-### Flexible filtering
-- hide jobs from the clients of a particular country
-- hide jobs where the title contains a keyword
+### Filters
+- the countries
+- the title keywords
