@@ -1,10 +1,6 @@
-body {
-    padding: 0px 0px 15px 0px;
-}
-
 .ew-card-parent {
     width: 100%;
-    padding: 15px 0px 0px 0px;
+    padding: 8px 0px 8px 0px;
     display: flex;
     justify-content: center;
 }

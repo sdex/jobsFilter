@@ -123,19 +123,25 @@ function showSnackbar(text) {
 
 function addCountry() {
     const inputFilter = document.getElementById('country_input')
+    const inputFilterParent = document.getElementById('country_input_parent')
     const filterValue = inputFilter.value
     if (!filterValue) {
         return
     }
-    if (!countries.includes()) {
-        showSnackbar('Wrong country name')
+    if (!countries.includes(filterValue)) {
+        inputFilterParent.classList.add('is-invalid')
+        inputFilterParent.classList.add('is-dirty')
         return
     }
     inputFilter.value = null
     const container = document.getElementById('countries_container')
-    addCountryItem(container, filterValue)
     getPrefs().then(data => {
         const excludedCountries = data['countries'] || []
+        if (excludedCountries.includes(filterValue)) {
+            showSnackbar('"' + filterValue + '" is added already')
+            return
+        }
+        addCountryItem(container, filterValue)
         excludedCountries.push(filterValue)
         setPrefs({
             countries: excludedCountries
