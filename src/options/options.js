@@ -102,16 +102,19 @@ function addEventListeners() {
     document.getElementById('btn_add_keyword').addEventListener('click', function () {
         addKeyword()
     })
-    document.getElementById('btn_export_config').addEventListener('click', function () {
+    document.getElementById('btn_export_config').addEventListener('click', function (e) {
         exportConfig()
+        e.preventDefault()
     })
-    document.getElementById('btn_import_config').addEventListener('click', function () {
+    document.getElementById('btn_import_config').addEventListener('click', function (e) {
         importConfig()
+        e.preventDefault()
     })
-    document.getElementById('btn_support_development').addEventListener('click', function () {
+    document.getElementById('btn_support_development').addEventListener('click', function (e) {
         browser.tabs.create({
             url: "https://sdex.dev/donate/"
         })
+        e.preventDefault()
     })
 }
 
@@ -275,6 +278,7 @@ function importConfig() {
     const inputFile = document.getElementById('file-input')
     inputFile.onchange = e => {
         const file = e.target.files[0]
+        e.target.value = ''
         loadConfigFile(file)
     }
     inputFile.click()
