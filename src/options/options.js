@@ -55,10 +55,10 @@ function load() {
 }
 
 function getPrefs() {
-    if (window.browser) {
-        return browser.storage.sync.get(null)
+    if (window.chrome) {
+        return new Promise(resolve => window.chrome.storage.sync.get(null, resolve))
     } else {
-        return new Promise(resolve => chrome.storage.sync.get(null, resolve))
+        return window.browser.storage.sync.get(null)
     }
 }
 
