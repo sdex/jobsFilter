@@ -112,7 +112,7 @@ function addEventListeners() {
     })
     document.getElementById('btn_support_development').addEventListener('click', function (e) {
         browser.tabs.create({
-            url: "https://sdex.dev/donate/"
+            url: "https://sdex.dev/jf/"
         })
         e.preventDefault()
     })
