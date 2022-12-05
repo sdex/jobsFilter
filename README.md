@@ -1,5 +1,8 @@
 ## jobsFilter - a little helper to diminish junk jobs from the feed 
 
+## Install 
+- [FireFox](https://addons.mozilla.org/en-US/firefox/addon/jobs-filter/)
+
 ## Filters
 - the countries
 - the title keywords
