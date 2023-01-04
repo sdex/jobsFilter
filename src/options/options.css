@@ -15,3 +15,22 @@
 .ew-chip {
     margin: 5px 5px;
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #303030;
+        color: whitesmoke;
+    }
+    .ew-card {
+        background: #454545;
+    }
+    .mdl-card__title {
+        color: whitesmoke;
+    }
+    .mdl-textfield__label {
+        color: #aaa;
+    }
+    .mdl-textfield__input {
+        color: white;
+    }
+}

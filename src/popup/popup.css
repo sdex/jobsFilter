@@ -2,25 +2,13 @@ body {
     width: 300px;
 }
 
-.rows * {
-    box-sizing: border-box;
+:root {
+    background: #fff;
+    color: black;
 }
 
 .col {
-    float: left;
     width: 100%;
-}
-
-.col-6 {
-    width: 50%;
-}
-
-.col-12 {
-    width: 100%;
-}
-
-.col-4 {
-    width: 33.33%;
 }
 
 .row::after {
@@ -32,14 +20,36 @@ body {
 .action-button {
     background-color: #cccccc;
     border: 1px black;
+    color: black;
     cursor: pointer;
     margin: 5px;
     text-align: center;
     padding: 5px;
     font-size: 20px;
-    font-weight: bold;
 }
 
 .action-button:active {
     background-color: whitesmoke;
+}
+
+a:link {
+    color: #0069c2;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        background: #333;
+        color: whitesmoke;
+    }
+    .action-button {
+        background-color: #454545;
+        color: #aaa;
+    }
+    .action-button:active {
+        background-color: #222;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    
 }
