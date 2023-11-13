@@ -55,7 +55,7 @@ function filter(excludedCountries, excludedTitleKeywords) {
       if (!hideJob && nodeJobTitle) {
         let titleText = nodeJobTitle.textContent.toLowerCase().trim()
         for (let keyword of excludedTitleKeywords) {
-          if (titleText.includes(keyword)) {
+          if (titleText.includes(keyword.toLowerCase().trim())) {
             console.log("%i. Reason: keyword=%s, title=%s, link=%s",
               counter, keyword, nodeJobTitle.textContent.trim(), nodeJobTitle.href)
             counter++
