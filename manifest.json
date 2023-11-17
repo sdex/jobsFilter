@@ -1,7 +1,7 @@
 {
     "name": "Jobs Filter",
-    "version": "1.0.1",
-    "description": "A little helper to diminish junk jobs from the feed",
+    "version": "1.0.4",
+    "description": "A little helper to remove junk jobs from the feed",
     "homepage_url": "https://sdex.dev/",
     "author": "Yuriy Mysochenko",
     "manifest_version": 2,
@@ -41,6 +41,7 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "jobsfilter@sdex.dev"
-        }
+        },
+        "gecko_android": {}
     }
 }

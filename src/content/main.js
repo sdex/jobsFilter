@@ -38,7 +38,7 @@ function getPrefs() {
 
 function filter(excludedCountries, excludedTitleKeywords) {
   if (document) {
-    let elements = document.querySelectorAll('section.up-card-list-section')
+    let elements = document.querySelectorAll('section.air3-card-section')
     let counter = 0
     for (let element of elements) {
       let hideJob = false
