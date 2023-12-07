@@ -42,12 +42,12 @@ function filter(excludedCountries, excludedTitleKeywords) {
     let counter = 0
     for (let element of elements) {
       let hideJob = false
-      let nodeClientLocation = element.querySelector('[data-test=client-country] strong')
+      let nodeClientLocation = element.querySelector('[data-test=client-country]')
       let nodeJobTitle = element.querySelector('.job-tile-title > a')
       if (nodeClientLocation) {
-        if (excludedCountries.includes(nodeClientLocation.textContent)) {
+        if (excludedCountries.includes(nodeClientLocation.textContent.trim())) {
           console.log("%i. Reason: country=%s, title=%s, link=%s",
-            counter, nodeClientLocation.textContent, nodeJobTitle.textContent.trim(), nodeJobTitle.href)
+            counter, nodeClientLocation.textContent.trim(), nodeJobTitle.textContent.trim(), nodeJobTitle.href)
           counter++
           hideJob = true
         }

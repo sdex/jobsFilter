@@ -1,6 +1,6 @@
 {
     "name": "Jobs Filter",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "A little helper to remove junk jobs from the feed",
     "homepage_url": "https://sdex.dev/",
     "author": "Yuriy Mysochenko",
