@@ -1,4 +1,4 @@
-## Jobs Filter - a little helper to diminish junk jobs from the feed 
+## Jobs Filter - clean the jobs feed 
 
 
 ## Install 
