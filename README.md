@@ -17,6 +17,9 @@
 - by countries
 - by the title keywords
 
+## Screenshots
+![Screenshot from 2024-08-07 19-46-28](https://github.com/user-attachments/assets/b8c0d163-e59f-4e09-ae36-fcac61e2c06c)
+
 ## Privacy
 This extension does not collect any of your private information 
 
