@@ -1,4 +1,4 @@
-## Jobs Filter - clean the jobs feed 
+## Jobs Filter - clean up the jobs feed 
 
 
 ## Install 
